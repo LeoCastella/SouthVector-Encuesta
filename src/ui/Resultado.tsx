@@ -1,15 +1,17 @@
-import type { Diagnostico, Semaforo, VersionCuestionario } from '../domain'
+import type { Diagnostico, Respuestas, Semaforo, VersionCuestionario } from '../domain'
 import { Matriz } from './Matriz'
+import { PedidoInforme } from './PedidoInforme'
 
 interface Props {
   cuestionario: VersionCuestionario
   diagnostico: Diagnostico
+  respuestas: Respuestas
   onReiniciar: () => void
 }
 
 const etiquetaSemaforo: Record<Semaforo, string> = { verde: 'Óptimo', amarillo: 'Precaución', rojo: 'Crítico' }
 
-export function Resultado({ cuestionario, diagnostico, onReiniciar }: Props) {
+export function Resultado({ cuestionario, diagnostico, respuestas, onReiniciar }: Props) {
   const cuadrante = cuestionario.cuadrantes[diagnostico.cuadrante]
   const pregunta = (id: number) => cuestionario.preguntas.find((p) => p.id === id)!
 
@@ -36,6 +38,8 @@ export function Resultado({ cuestionario, diagnostico, onReiniciar }: Props) {
           </div>
         )}
       </section>
+
+      <PedidoInforme version={cuestionario.version} respuestas={respuestas} />
 
       <section>
         <h2>Detalle por indicador</h2>

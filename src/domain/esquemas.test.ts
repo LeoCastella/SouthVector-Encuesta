@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import { cuestionarioV1 } from './cuestionario-v1'
-import { esquemaRespuestas } from './esquemas'
+import { esquemaPedidoInforme, esquemaRespuestas } from './esquemas'
 
 const esquema = esquemaRespuestas(cuestionarioV1)
 const validas = Object.fromEntries(cuestionarioV1.preguntas.map((p) => [String(p.id), 2]))
@@ -22,5 +22,36 @@ describe('esquemaRespuestas', () => {
 
   it('rechaza otra versión del cuestionario', () => {
     expect(esquema.safeParse({ version: 2, respuestas: validas }).success).toBe(false)
+  })
+})
+
+describe('esquemaPedidoInforme', () => {
+  const pedido = esquemaPedidoInforme(cuestionarioV1)
+  const base = {
+    version: 1,
+    respuestas: validas,
+    nombre: 'Ana',
+    empresa: 'ACME',
+    email: 'ana@acme.com',
+    consentimiento: true,
+  }
+
+  it('acepta un pedido completo con UTM', () => {
+    expect(pedido.safeParse({ ...base, utm: { source: 'linkedin' } }).success).toBe(true)
+  })
+
+  it('exige consentimiento explícito', () => {
+    expect(pedido.safeParse({ ...base, consentimiento: false }).success).toBe(false)
+    const { consentimiento: _c, ...sinConsentimiento } = base
+    expect(pedido.safeParse(sinConsentimiento).success).toBe(false)
+  })
+
+  it.each(['', 'no-es-email', 'a@b'])('rechaza el email %j', (email) => {
+    expect(pedido.safeParse({ ...base, email }).success).toBe(false)
+  })
+
+  it('rechaza nombre o empresa vacíos', () => {
+    expect(pedido.safeParse({ ...base, nombre: '   ' }).success).toBe(false)
+    expect(pedido.safeParse({ ...base, empresa: '' }).success).toBe(false)
   })
 })

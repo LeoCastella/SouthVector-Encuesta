@@ -23,12 +23,33 @@ npm run test:e2e     # E2E y accesibilidad (escritorio y móvil) sobre el build 
 E2E_BASE_URL=https://<deploy>.netlify.app npm run test:e2e   # contra un deploy
 ```
 
+## Variables de entorno (Netlify)
+
+| Variable                 | Para qué                                                                                          |
+| ------------------------ | ------------------------------------------------------------------------------------------------- |
+| `SHEETS_WEBHOOK_URL`     | URL `/exec` del Apps Script de la Sheet de leads ([apps-script/Codigo.gs](apps-script/Codigo.gs)) |
+| `SHEETS_TOKEN`           | Token compartido con el Apps Script (propiedad `TOKEN`)                                           |
+| `BREVO_API_KEY`          | Clave de la API de Brevo                                                                          |
+| `EMAIL_REMITENTE`        | Remitente verificado en Brevo                                                                     |
+| `EMAIL_REMITENTE_NOMBRE` | Opcional, por defecto `South Vector`                                                              |
+| `TELEGRAM_BOT_TOKEN`     | Token del bot (BotFather)                                                                         |
+| `TELEGRAM_CHAT_ID`       | Id del grupo "South Vector - Encuestas"                                                           |
+
+Marcar todas como secretas. Nunca se suben al repositorio.
+
+## Panel comercial
+
+La Sheet de leads es el panel básico: acceso con cuentas de Google, filtro en los encabezados, columna **Estado**
+(Nuevo, Contactado, En negociación, Ganado, Perdido) y exportación a CSV desde Archivo > Descargar.
+
 ## Estructura
 
 ```
 src/domain/          Modelo, cuestionario v1, motor de puntaje y esquemas (sin dependencias de UI)
 src/ui/              Componentes React
+server/              Caso de uso "pedir informe", PDF y adaptadores (Sheets, Brevo, Telegram)
 netlify/functions/   API (Netlify Functions)
+apps-script/         Receptor de leads para la Google Sheet
 e2e/                 Pruebas Playwright
 docs/adr/            Decisiones de arquitectura
 ```

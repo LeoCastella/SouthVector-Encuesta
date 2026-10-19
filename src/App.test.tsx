@@ -23,6 +23,7 @@ describe('App', () => {
     expect(screen.getByRole('heading', { level: 1, name: 'Deuda técnica operativa' })).toBeInTheDocument()
     expect(screen.getByText('Frecuencia 17/24 · Impacto 12/24')).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Quality Engineering' })).toBeInTheDocument()
-    expect(screen.queryByRole('textbox')).not.toBeInTheDocument()
+    // Los datos de contacto solo se piden, opcionalmente, para el informe PDF.
+    expect(screen.getByRole('heading', { name: 'Recibí el informe completo en PDF' })).toBeInTheDocument()
   })
 })

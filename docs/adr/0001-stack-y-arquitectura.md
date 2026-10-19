@@ -1,6 +1,6 @@
 # ADR 0001 · Stack y arquitectura
 
-- Estado: propuesto (pendiente de confirmar base de datos y proveedor de email)
+- Estado: aceptado
 - Fecha: 2026-10-19
 - Ticket: LEO-14
 
@@ -35,12 +35,15 @@ informe PDF por email con consentimiento (RGPD, UE), aviso de leads por Telegram
 
 ## Alternativas descartadas
 
-- Google Sheet como base de datos: no soporta login del panel, roles, borrado RGPD ni consultas con filtros.
+- Supabase (Postgres + Auth en Frankfurt): más robusto, pero agrega un servicio. Queda como opción si el volumen o el panel crecen.
+- Panel web propio con login: innecesario mientras el equipo comercial sea chico.
 - Next.js: agrega SSR que el formulario no necesita.
 - Puntaje solo en el navegador: el servidor recalcula siempre y no confía en el cliente.
 
 ## Consecuencias
 
-- Hay que crear cuentas en Supabase y Brevo, y un bot de Telegram. Los secretos van como variables de entorno en Netlify.
-- Las funciones de Netlify en plan Free corren fuera de la UE; los datos persistidos quedan en Frankfurt.
+- Hay que crear una cuenta en Brevo y un bot de Telegram, y publicar el Apps Script. Los secretos van como variables de entorno en Netlify.
+- Las funciones de Netlify y Google procesan datos fuera de la UE con garantías (DPF / cláusulas tipo).
   Se documenta en la política de privacidad.
+- Sin dominio propio, el email sale desde un remitente verificado en Brevo; con dominio se configura SPF/DKIM.
+- Ejes, pesos y umbral sin cambios en la 1.0.0 (LEO-20 queda para la próxima versión).

@@ -323,3 +323,67 @@ button:focus-visible {
 .semaforo-rojo {
   background: var(--rojo);
 }
+
+.pedido {
+  border: 1px solid var(--brand);
+  border-radius: var(--radio);
+  background: var(--panel);
+  padding: 8px 20px 20px;
+  margin: 32px 0;
+}
+.pedido form {
+  display: grid;
+  gap: 14px;
+}
+.pedido label {
+  display: grid;
+  gap: 4px;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.pedido input:not([type='checkbox']) {
+  font: inherit;
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text);
+}
+.pedido input:focus-visible {
+  outline: 2px solid var(--brand);
+}
+.pedido .consentimiento {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-weight: 400;
+  color: var(--text-dim);
+}
+.pedido .consentimiento input {
+  margin-top: 5px;
+  accent-color: var(--brand);
+}
+.pedido .trampa {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.error {
+  color: #fca5a5;
+  margin: 0;
+}
+.legal {
+  max-width: 680px;
+}
+.legal h2 {
+  font-size: 1.1rem;
+  margin-top: 28px;
+}
+.pie a {
+  color: var(--text-dim);
+}
+a {
+  color: var(--brand);
+}

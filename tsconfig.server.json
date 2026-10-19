@@ -16,5 +16,5 @@
     "erasableSyntaxOnly": true,
     "noFallthroughCasesInSwitch": true
   },
-  "include": ["netlify", "e2e", "playwright.config.ts"]
+  "include": ["netlify", "server", "e2e", "playwright.config.ts"]
 }
