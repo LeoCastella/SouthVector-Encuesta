@@ -1,6 +1,6 @@
 /**
  * Datos del responsable del tratamiento (RGPD art. 13).
- * PENDIENTE: completar con los datos reales de South Vector antes de publicar en producción.
+ * v1.0.0: solo nombre y email por decisión de Leo. Completar identificación y domicilio en la versión definitiva.
  */
 export const responsable = {
   nombre: 'South Vector',
