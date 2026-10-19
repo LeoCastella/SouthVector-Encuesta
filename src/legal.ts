@@ -6,7 +6,7 @@ export const responsable = {
   nombre: 'South Vector',
   identificacion: '',
   domicilio: '',
-  emailPrivacidad: '',
+  emailPrivacidad: 'castellaleo@gmail.com',
 }
 
 /** Meses que se conservan los datos de contacto antes de anonimizarlos. */
