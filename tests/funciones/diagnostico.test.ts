@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import handler from './diagnostico.mts'
+import handler from '../../netlify/functions/diagnostico.mts'
 
 const pedir = (cuerpo: unknown, method = 'POST') =>
   handler(

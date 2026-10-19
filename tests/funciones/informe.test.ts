@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { pedidoValido } from '../../server/prueba-utils'
-import handler from './informe.mts'
+import handler from '../../netlify/functions/informe.mts'
 
 const ENTORNO = {
   SHEETS_WEBHOOK_URL: 'https://script.example/exec',

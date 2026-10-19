@@ -7,7 +7,7 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     setupFiles: ['./src/test-setup.ts'],
-    include: ['src/**/*.test.{ts,tsx}', 'netlify/**/*.test.ts', 'server/**/*.test.ts'],
+    include: ['src/**/*.test.{ts,tsx}', 'tests/**/*.test.ts', 'server/**/*.test.ts'],
     coverage: {
       include: ['src/domain/**', 'netlify/functions/**', 'server/**'],
       thresholds: { lines: 90, branches: 90, functions: 90 },
